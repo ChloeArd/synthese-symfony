@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Service\PlaceholderImageService;
 use Doctrine\DBAL\Driver\OCI8\Exception\Error;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,12 +13,11 @@ class ArticleController extends AbstractController {
 
     /**
      * List available articles
-     * @return Response
+     * @return JsonResponse
      */
     #[Route('/', 'list')]
-    public function list(): Response {
-        return $this->render("article/article.html.twig",
-        ["message" => "<h1>Liste des articles</h1>"]);
+    public function list(): JsonResponse {
+        return $this->json(['article 1', 'article 2', 'article, 3', 'article 4']);
     }
 
     /**
@@ -27,7 +27,8 @@ class ArticleController extends AbstractController {
      */
     #[Route('/show/{articleID<\d+>}', 'show')]
     public function show(int $articleID): Response {
-        return new Response("<h1>Affichage de l'article $articleID</h1>");
+        return $this->render("article/article.html.twig",
+            ["message" => "<h1>Affichage de l'article $articleID</h1>"]);
     }
 
     /**
