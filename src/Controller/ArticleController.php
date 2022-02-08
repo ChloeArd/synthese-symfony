@@ -16,7 +16,8 @@ class ArticleController extends AbstractController {
      */
     #[Route('/', 'list')]
     public function list(): Response {
-        return new Response("<h1>Liste des articles</h1>");
+        return $this->render("article/article.html.twig",
+        ["message" => "<h1>Liste des articles</h1>"]);
     }
 
     /**
@@ -41,6 +42,15 @@ class ArticleController extends AbstractController {
         }
         catch (Error $e) {
             $success = false;
+        }
+
+        $id = 1;
+
+        if ($id === 2) {
+            return $this->redirectToRoute("articles_list");
+        }
+        elseif ($id === 3) {
+            return $this->redirect("https://www.symfony.com");
         }
 
         if ($success) {
