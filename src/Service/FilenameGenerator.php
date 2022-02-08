@@ -10,6 +10,6 @@ class FilenameGenerator implements UniqIdentifierGeneratorInterface {
      * @return string
      */
     public function generate(): string {
-        return uniqid() . "png";
+        return uniqid() . ".png";
     }
 }
